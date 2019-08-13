@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ListComponent } from './countries/list/list.component';
-import { SidebarComponent } from './countries/sidebar/sidebar.component';
+import { RouterModule, Routes } from '@angular/router';
 
+import { PreloadModulesStrategy } from './core/strategies/preload-modules.strategy';
 
-const routes: Routes = [
-        { path: "", redirectTo: "countries", pathMatch: "full" },
-        {
-          path: "countries",
-          component: ListComponent,
-          children: [
-            { path: ":id", component: SidebarComponent },
-          ]
-        }];
+const app_routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/customers' },
+  { path: 'customers/:id',
+    data: { preload: true }, loadChildren: () => import('../app/customer/customer.module').then(m => m.CustomerModule)
+  },
+  { path: 'customers', loadChildren: () => import('../app/customers/customers.module').then(m => m.CustomersModule) },
+  { path: '**', pathMatch: 'full', redirectTo: '/customers' }
+
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(app_routes, { preloadingStrategy: PreloadModulesStrategy }) ],
+  exports: [ RouterModule ],
+  providers: [PreloadModulesStrategy]
 })
 export class AppRoutingModule { }

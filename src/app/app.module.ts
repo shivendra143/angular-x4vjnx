@@ -1,28 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CountriesComponent } from './countries/countries.component';
-import { HeaderComponent } from './countries/header/header.component';
-import { SidebarComponent } from './countries/sidebar/sidebar.component';
-import { ListComponent } from './countries/list/list.component';
-import { CountryListComponent } from './countries/list/country-list/country-list.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CountriesComponent,
-    HeaderComponent,
-    SidebarComponent,
-    ListComponent,
-    CountryListComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,     // Main routes for application
+    CoreModule,           // Singleton objects (services, components that are loaded only once, etc.)
+    SharedModule          // Shared (multi-instance) objects
   ],
-  providers: [],
+  declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
