@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-country-list
+      *ngFor="let cone of country; let i = index"
+      [country]="cone"
+      [index]="i"
+    ></app-country-list>
+  </div>
+</div>
+
