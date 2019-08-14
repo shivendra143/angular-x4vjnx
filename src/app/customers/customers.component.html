@@ -22,7 +22,7 @@
                             </a>
                         </li>
                         <li class="toolbar-item">
-                            <a (click)="changeDisplayMode(displayModeEnum.Map)" [class.active]="displayMode === displayModeEnum.Map">
+                            <a>
                                 <span class="glyphicon glyphicon-map-marker"></span> Map View
                             </a>
                         </li>
@@ -37,30 +37,30 @@
                 </div>
             </div>
         </div>
-        
-        <cm-customers-card 
-          [customers]="filteredCustomers" 
+
+        <cm-customers-card
+          [customers]="filteredCustomers"
           [hidden]="displayMode !== displayModeEnum.Card"></cm-customers-card>
-    
-        <cm-customers-grid 
-          [customers]="filteredCustomers" 
+
+        <cm-customers-grid
+          [customers]="filteredCustomers"
           [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
 
-        <cm-map *ngIf="filteredCustomers.length" 
-            [zoom]="2" 
-            [enabled]="displayMode === displayModeEnum.Map" 
+        <cm-map *ngIf="filteredCustomers.length"
+            [zoom]="2"
+            [enabled]="displayMode === displayModeEnum.Map"
             [hidden]="displayMode !== displayModeEnum.Map">
-          <cm-map-point 
-            *ngFor="let customer of filteredCustomers" 
-            [latitude]="customer.latitude" 
+          <cm-map-point
+            *ngFor="let customer of filteredCustomers"
+            [latitude]="customer.latitude"
             [longitude]="customer.longitude"
             [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</a></h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
         </cm-map>
 
         <cm-pagination
-            [totalItems]="totalRecords" 
-            [pageSize]="pageSize" 
+            [totalItems]="totalRecords"
+            [pageSize]="pageSize"
             (pageChanged)="pageChanged($event)"></cm-pagination>
-          
+
     </div>
 </div>

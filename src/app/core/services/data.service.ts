@@ -14,9 +14,9 @@ export class DataService {
     port = (this.window.location.port) ? ':' + this.window.location.port : '';
     baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}${this.port}`;
 
-    customersBaseUrl1 = 'http://localhost:5050/api/states';
-    customersBaseUrl = 'http://localhost:5050/api/customers';
-    ordersBaseUrl = 'http://localhost:5050/api/orders';
+    customersBaseUrl1 = 'https://customerappnew.herokuapp.com/api/states';
+    customersBaseUrl = 'https://customerappnew.herokuapp.com/api/customers';
+    ordersBaseUrl = 'https://customerappnew.herokuapp.com/api/orders';
     orders: IOrder[];
     states: IState[];
 
