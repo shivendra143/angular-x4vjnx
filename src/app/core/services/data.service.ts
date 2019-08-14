@@ -14,7 +14,8 @@ export class DataService {
     port = (this.window.location.port) ? ':' + this.window.location.port : '';
     baseUrl = `${this.window.location.protocol}//${this.window.location.hostname}${this.port}`;
 
-    customersBaseUrl ='http://localhost:5050/api/customers';
+    customersBaseUrl1 = 'http://localhost:5050/api/states';
+    customersBaseUrl = 'http://localhost:5050/api/customers';
     ordersBaseUrl = 'http://localhost:5050/api/orders';
     orders: IOrder[];
     states: IState[];
@@ -83,8 +84,11 @@ export class DataService {
     }
 
     getStates(): Observable<IState[]> {
-        return this.http.get<IState[]>('/api/states')
-            .pipe(catchError(this.handleError));
+        return this.http.get<IState[]>(this.customersBaseUrl1)
+        .pipe(
+          map(res => res),
+          catchError(this.handleError)
+        );
     }
 
     private handleError(error: HttpErrorResponse) {

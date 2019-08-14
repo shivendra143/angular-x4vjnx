@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../core/services/data.service';
 import { ICustomer, IPagedResults } from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
-import { LoggerService } from '../core/services/logger.service';
 
 @Component({
   selector: 'cm-customers',
@@ -21,8 +20,7 @@ export class CustomersComponent implements OnInit {
   pageSize = 10;
 
   constructor(private dataService: DataService,
-    private filterService: FilterService,
-    private logger: LoggerService) { }
+    private filterService: FilterService) { }
 
   ngOnInit() {
     this.title = 'Customers';
@@ -46,8 +44,8 @@ export class CustomersComponent implements OnInit {
           this.customers = this.filteredCustomers = response.results;
           this.totalRecords = response.totalRecords;
         },
-        (err: any) => this.logger.log(err),
-        () => this.logger.log('getCustomersPage() retrieved customers for page: ' + page));
+        (err: any) => 'error',
+        () => 'error');
   }
 
   filterChanged(data: string) {

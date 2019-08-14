@@ -4,7 +4,6 @@ import { PlaygroundModule } from 'angular-playground';
 PlaygroundModule
   .configure({
       selector: 'cm-app-component',
-      overlay: false,
       modules: []
   });
 

@@ -10,9 +10,9 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   imports: [
     BrowserModule,
-    AppRoutingModule,     // Main routes for application
-    CoreModule,           // Singleton objects (services, components that are loaded only once, etc.)
-    SharedModule          // Shared (multi-instance) objects
+    AppRoutingModule,
+    CoreModule,
+    SharedModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

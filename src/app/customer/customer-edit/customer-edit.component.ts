@@ -5,8 +5,6 @@ import { NgForm } from '@angular/forms';
 import { DataService } from '../../core/services/data.service';
 import { ModalService, IModalContent } from '../../core/modal/modal.service';
 import { ICustomer, IState } from '../../shared/interfaces';
-import { GrowlerService, GrowlerMessageType } from '../../core/growler/growler.service';
-import { LoggerService } from '../../core/services/logger.service';
 
 @Component({
   selector: 'cm-customer-edit',
@@ -37,9 +35,8 @@ export class CustomerEditComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private dataService: DataService,
-    private growler: GrowlerService,
-    private modalService: ModalService,
-    private logger: LoggerService) { }
+    private modalService: ModalService
+    ) { }
 
   ngOnInit() {
     // Subscribe to params so if it changes we pick it up. Don't technically need that here
@@ -72,26 +69,23 @@ export class CustomerEditComponent implements OnInit {
             this.router.navigate(['/customers']);
           } else {
             const msg = 'Unable to insert customer';
-            this.growler.growl(msg, GrowlerMessageType.Danger);
             this.errorMessage = msg;
           }
         },
-          (err: any) => this.logger.log(err));
+          (err: any) => 'error');
     } else {
       this.dataService.updateCustomer(this.customer)
         .subscribe((status: boolean) => {
           if (status) {
-            // Mark form as pristine so that CanDeactivateGuard won't prompt before navigation
             this.customerForm.form.markAsPristine();
-            this.growler.growl('Operation performed successfully.', GrowlerMessageType.Success);
-            // this.router.navigate(['/customers']);
+            this.router.navigate(['/customers']);
           } else {
             const msg = 'Unable to update customer';
-            this.growler.growl(msg, GrowlerMessageType.Danger);
+
             this.errorMessage = msg;
           }
         },
-          (err: any) => this.logger.log(err));
+          (err: any) => 'error');
     }
   }
 
@@ -111,7 +105,7 @@ export class CustomerEditComponent implements OnInit {
           this.errorMessage = 'Unable to delete customer';
         }
       },
-        (err) => this.logger.log(err));
+        (err) => 'error');
   }
 
   canDeactivate(): Promise<boolean> | boolean {
